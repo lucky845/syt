@@ -16,5 +16,5 @@ spring:
     password: root
   # 返回json的全局时间
   jackson:
-    data-format: yyyy-MM-dd HH:mm:ss
-    time-zone: GNT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
