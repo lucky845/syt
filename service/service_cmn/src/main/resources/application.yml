@@ -18,3 +18,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+mybatis-plus:
+  # 设置mapper映射文件路径
+  mapper-locations: classpath:com/atguigu/yygh/cmn/mapper/xml/*.xml
