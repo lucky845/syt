@@ -1,12 +1,23 @@
 package com.atguigu.yygh.cmn.service.impl;
 
+import com.alibaba.excel.EasyExcel;
+import com.atguigu.yygh.cmn.listener.DictEeVoListener;
 import com.atguigu.yygh.cmn.mapper.DictMapper;
 import com.atguigu.yygh.cmn.service.DictService;
 import com.atguigu.yygh.model.cmn.Dict;
+import com.atguigu.yygh.vo.cmn.DictEeVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +28,7 @@ import java.util.List;
  * @author lucky845
  * @since 2022-03-02
  */
+@Slf4j
 @Service
 public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements DictService {
 
@@ -49,6 +61,45 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         wrapper.eq("parent_id", pid);
         Integer count = baseMapper.selectCount(wrapper);
         return count > 0;
+    }
+
+    /**
+     * 导出数据字典Excel
+     */
+    @Override
+    public void exportData(HttpServletResponse response) {
+        try {
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+            String fileName = URLEncoder.encode("数据字典", "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+
+            List<Dict> dictList = baseMapper.selectList(null);
+            List<DictEeVo> dictVoList = new ArrayList<>(dictList.size());
+            for (Dict dict : dictList) {
+                DictEeVo dictVo = new DictEeVo();
+                BeanUtils.copyProperties(dict, dictVo);
+                dictVoList.add(dictVo);
+            }
+            EasyExcel.write(response.getOutputStream(), DictEeVo.class).sheet("数据字典").doWrite(dictVoList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 读取Excel文件
+     * 出现异常就回滚
+     *
+     * @param inputStream 读取Excel文件的输入流
+     */
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void importData(InputStream inputStream) {
+        // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+        EasyExcel.read(inputStream, DictEeVo.class, new DictEeVoListener(baseMapper)).sheet().doRead();
+        log.info("Excel导入成功");
     }
 
 }

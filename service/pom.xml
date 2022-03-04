@@ -49,6 +49,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- easyExcel -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+        </dependency>
         <!-- 服务调用feign -->
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.cloud</groupId>-->
