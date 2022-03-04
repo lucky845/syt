@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,9 +35,12 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
 
     /**
      * 根据数据id查询子数据列表
+     * <p>
+     * 注解@Cacheable(value = "dict", key = "selectIndexList + #pid") 表示将该方法添加到Redis缓存
      *
      * @param pid 数据id
      */
+    @Cacheable(value = "dict", key = "'selectIndexList'+#pid")
     @Override
     public List<Dict> getChildListByParentId(Long pid) {
         QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
