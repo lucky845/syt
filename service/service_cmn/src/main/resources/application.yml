@@ -1,0 +1,20 @@
+# 服务端口
+server:
+  port: 8202
+  # 服务名
+spring:
+  application:
+    name: service-cmn
+  # 环境设置
+  profiles:
+    active: dev
+  # mysql数据库连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///yygh_cmn?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+  # 返回json的全局时间
+  jackson:
+    data-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GNT+8
