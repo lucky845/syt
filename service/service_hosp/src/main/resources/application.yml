@@ -18,6 +18,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  # mongodb配制
+  data:
+    mongodb:
+      uri: mongodb://192.168.229.128:27017/test
 # mybatis日志
 mybatis-plus:
   configuration:
@@ -26,3 +30,4 @@ mybatis-plus:
 #logging:
 #  level:
 #    root: WARN
+
