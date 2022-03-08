@@ -1,6 +1,7 @@
 package com.atguigu.yygh.cmn.service.impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.util.StringUtils;
 import com.atguigu.yygh.cmn.listener.DictEeVoListener;
 import com.atguigu.yygh.cmn.mapper.DictMapper;
 import com.atguigu.yygh.cmn.service.DictService;
@@ -106,4 +107,57 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         log.info("Excel导入成功");
     }
 
+    /**
+     * 根据上级编码与值获取数据字典名称
+     *
+     * @param parentDictCode 上级编码
+     * @param value          值
+     */
+    @Override
+    public String getNameByParentDictCodeAndValue(String parentDictCode, String value) {
+        // 如果value能唯一定位数据字典,parentDictCode可以传空,例如: 省市区的value值可以唯一确定
+        if (StringUtils.isEmpty(parentDictCode)) {
+            Dict dict = baseMapper.selectOne(new QueryWrapper<Dict>().eq("value", value));
+            if (dict != null) {
+                return dict.getName();
+            }
+        } else {
+            Dict parentDict = this.getDictByDictCode(parentDictCode);
+            if (parentDict == null) {
+                return "";
+            }
+
+            Dict dict = baseMapper.selectOne(new QueryWrapper<Dict>()
+                    .eq("parent_id", parentDict.getId()).eq("value", value));
+            if (dict != null) {
+                return dict.getName();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 根据dict_code 查询Dict
+     *
+     * @param dictCode 上层编码
+     */
+    private Dict getDictByDictCode(String dictCode) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dict_code", dictCode);
+        return baseMapper.selectOne(queryWrapper);
+    }
+
+    /**
+     * 根据dictCode获取下级节点
+     *
+     * @param dictCode 节点编码
+     */
+    @Override
+    public List<Dict> findByDictCode(String dictCode) {
+        Dict dict = this.getDictByDictCode(dictCode);
+        if (dict == null) {
+            return null;
+        }
+        return this.getChildListByParentId(dict.getId());
+    }
 }

@@ -18,6 +18,7 @@
         <module>model</module>
         <module>service</module>
         <module>coder</module>
+        <module>service_gateway</module>
     </modules>
 
     <properties>

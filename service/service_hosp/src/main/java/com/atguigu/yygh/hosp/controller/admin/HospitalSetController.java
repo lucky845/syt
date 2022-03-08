@@ -27,7 +27,7 @@ import java.util.Random;
  * @since 2022-02-28
  */
 @Api(tags = "医院设置接口")
-@CrossOrigin // 跨域: 域名、端口、协议任一不同，都是跨域 (前后端分离开发中，需要考虑ajax跨域的问题)
+//@CrossOrigin // 跨域: 域名、端口、协议任一不同，都是跨域 (前后端分离开发中，需要考虑ajax跨域的问题)
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
 public class HospitalSetController {

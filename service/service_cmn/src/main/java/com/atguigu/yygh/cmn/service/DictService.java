@@ -34,4 +34,17 @@ public interface DictService extends IService<Dict> {
      * @param inputStream 读取Excel文件的输入流
      */
     void importData(InputStream inputStream);
+
+    /**
+     * 根据上级编码与值获取数据字典名称
+     * @param parentDictCode 上级编码
+     * @param value 值
+     */
+    String getNameByParentDictCodeAndValue(String parentDictCode,String value);
+
+    /**
+     * 根据dictCode获取下级节点
+     * @param dictCode 节点编码
+     */
+    List<Dict> findByDictCode(String dictCode);
 }

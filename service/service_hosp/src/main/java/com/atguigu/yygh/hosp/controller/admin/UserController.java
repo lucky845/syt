@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 @Api(tags = "管理员模块")
-@CrossOrigin // 跨域: 域名、端口、协议任一不同，都是跨域 (前后端分离开发中，需要考虑ajax跨域的问题)
+//@CrossOrigin // 跨域: 域名、端口、协议任一不同，都是跨域 (前后端分离开发中，需要考虑ajax跨域的问题)
 @RequestMapping("/admin/user")
 @RestController
 public class UserController {

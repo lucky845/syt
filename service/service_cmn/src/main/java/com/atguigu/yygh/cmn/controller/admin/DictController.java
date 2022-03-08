@@ -26,7 +26,7 @@ import java.util.List;
 @Api(tags = "数据字典接口")
 @RestController
 @RequestMapping("/admin/cmn/dict")
-@CrossOrigin
+//@CrossOrigin
 public class DictController {
 
     @Autowired
@@ -74,6 +74,51 @@ public class DictController {
         } catch (Exception e) {
             return R.error().message("数据字典批量导入失败");
         }
+    }
+
+    /**
+     * 根据上级id和值获取数据字典名称
+     *
+     * @param parentDictCode 上级编码
+     * @param value          值
+     */
+    @ApiOperation(value = "获取数据字典名称")
+    @GetMapping(value = "/getName/{parentDictCode}/{value}")
+    public String getName(
+            @ApiParam(name = "parentDictCode", value = "上级编码", required = true)
+            @PathVariable("parentDictCode") String parentDictCode,
+
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+
+        return dictService.getNameByParentDictCodeAndValue(parentDictCode, value);
+    }
+
+    /**
+     * 根据值获取数据字典名称
+     *
+     * @param value 值
+     */
+    @ApiOperation(value = "获取数据字典名称")
+    @GetMapping(value = "/getName/{value}")
+    public String getName(
+            @ApiParam(name = "value", value = "值", required = true)
+            @PathVariable("value") String value) {
+
+        return dictService.getNameByParentDictCodeAndValue("", value);
+    }
+
+    /**
+     * 根据dictCode获取下级节点
+     * @param dictCode 节点编码
+     */
+    @ApiOperation(value = "根据dictCode获取下级节点")
+    @GetMapping(value = "/findByDictCode/{dictCode}")
+    public R findByDictCode(
+            @ApiParam(name = "dictCode", value = "节点编码", required = true)
+            @PathVariable String dictCode) {
+        List<Dict> list = dictService.findByDictCode(dictCode);
+        return R.ok().data("list", list);
     }
 
 }

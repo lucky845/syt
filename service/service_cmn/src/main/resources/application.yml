@@ -31,6 +31,11 @@ spring:
         # 最大阻塞等待时间(负数表示没限制)
         max-idle: 5
         min-idle: 0
+  # nacos服务地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 mybatis-plus:
   # 设置mapper映射文件路径
   mapper-locations: classpath:com/atguigu/yygh/cmn/mapper/xml/*.xml
