@@ -143,4 +143,19 @@ public class HospitalServiceImpl implements HospitalService {
         hospital.setBookingRule(null);
         return result;
     }
+
+    /**
+     * 根据医院编号获取医院名称
+     *
+     * @param hoscode 医院编号
+     */
+    @Override
+    public String getHospName(String hoscode) {
+        Hospital hospital = hospitalRepository.getHospitalByHoscode(hoscode);
+        if (null != hospital) {
+            return hospital.getHosname();
+        }
+        return "";
+    }
+
 }

@@ -16,6 +16,10 @@
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
         <!--依赖service_utils-->
         <dependency>
             <groupId>com.atguigu</groupId>
