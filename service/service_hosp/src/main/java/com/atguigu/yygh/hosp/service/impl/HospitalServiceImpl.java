@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -158,4 +159,31 @@ public class HospitalServiceImpl implements HospitalService {
         return "";
     }
 
+    /**
+     * 根据医院名称获取医院列表
+     *
+     * @param hosname 医院名称
+     */
+    @Override
+    public List<Hospital> findByHosname(String hosname) {
+        return hospitalRepository.findHospitalByHosnameLike(hosname);
+    }
+
+    /**
+     * 医院预约挂号详情
+     *
+     * @param hoscode 医院code
+     */
+    @Override
+    public Map<String, Object> item(String hoscode) {
+        Map<String, Object> result = new HashMap<>();
+        // 医院详情
+        Hospital hospital = this.packgeHospital(this.getByHoscode(hoscode));
+        result.put("hospital", hospital);
+        // 预约规则
+        result.put("bookingRule", hospital.getBookingRule());
+        // 不需要重新返回
+        hospital.setBookingRule(null);
+        return result;
+    }
 }
