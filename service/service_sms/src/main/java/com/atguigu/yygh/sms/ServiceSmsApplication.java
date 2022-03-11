@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan({"com.atguigu"})
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)//取消数据源自动配置
-public class ServiceMsmApplication {
+public class ServiceSmsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceMsmApplication.class, args);
+        SpringApplication.run(ServiceSmsApplication.class, args);
     }
 }
