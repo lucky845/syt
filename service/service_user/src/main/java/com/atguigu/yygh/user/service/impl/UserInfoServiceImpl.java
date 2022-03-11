@@ -1,13 +1,15 @@
 package com.atguigu.yygh.user.service.impl;
 
 import com.atguigu.yygh.common.exception.YYGHException;
-import com.atguigu.yygh.common.utils.JwtHelper;
+import com.atguigu.yygh.common.utlis.JwtHelper;
 import com.atguigu.yygh.model.user.UserInfo;
 import com.atguigu.yygh.user.mapper.UserInfoMapper;
 import com.atguigu.yygh.user.service.UserInfoService;
 import com.atguigu.yygh.vo.user.LoginVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -25,6 +27,8 @@ import java.util.Map;
 @Service
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements UserInfoService {
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 会员登录
@@ -40,7 +44,11 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
             throw new YYGHException(200001, "手机号或验证码为空");
         }
 
-        // todo 校验验证码
+        // 校验验证码
+        String mobleCode = (String) redisTemplate.opsForValue().get(phone);
+        if (!code.equals(mobleCode)) {
+            throw new YYGHException(20001, "验证码错误");
+        }
 
         // 判断手机号是否已经被使用
         QueryWrapper<UserInfo> userInfoQueryWrapper = new QueryWrapper<>();
