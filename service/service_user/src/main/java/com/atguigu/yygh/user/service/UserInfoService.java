@@ -22,4 +22,9 @@ public interface UserInfoService extends IService<UserInfo> {
      * @param loginVo 登录信息
      */
     Map<String, Object> login(LoginVo loginVo);
+
+    /**
+     * 根据openid查询微信信息
+     */
+    UserInfo selectWxInfoByOpenId(String openid);
 }

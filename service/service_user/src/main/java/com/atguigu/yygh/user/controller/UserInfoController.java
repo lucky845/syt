@@ -24,7 +24,7 @@ import java.util.Map;
  */
 @Api(tags = "用户信息")
 @RestController
-@RequestMapping("/api/user-info")
+@RequestMapping("/api/userinfo")
 public class UserInfoController {
 
     @Autowired

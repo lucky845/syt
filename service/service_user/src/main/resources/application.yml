@@ -1,6 +1,6 @@
 # 服务端口
 server:
-  port: 8203
+  port: 8160
 
 # 服务名
 spring:
@@ -32,3 +32,13 @@ spring:
 # 配制mapper.xml文件的路径
 mybatis-plus:
   mapper-locations: classpath:com/atguigu/yygh/user/mapper/xml/*.xml
+
+# 微信开放平台
+wx:
+  open:
+    # appid
+    app_id: wxed9954c01bb89b47
+    # appsecret
+    app_secret: a7482517235173ddb4083788de60b90e
+    # 重定向url
+    redirect_url: http://localhost:8160/api/userinfo/wx/callback

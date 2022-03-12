@@ -43,13 +43,13 @@ public class SMSController {
         code = RandomUtil.getFourBitRandom();
         Map<String, Object> param = new HashMap<>();
         param.put("code", code);
-        boolean isSend = smsService.send(phone, param);
-        if (isSend) {
+        // boolean isSend = smsService.send(phone, param);
+//        if (isSend) {
             redisTemplate.opsForValue().set(phone, code, 5, TimeUnit.MINUTES);
             return R.ok();
-        } else {
-            return R.error().message("发送短信失败");
-        }
+//        } else {
+//            return R.error().message("发送短信失败");
+//        }
 
     }
 
