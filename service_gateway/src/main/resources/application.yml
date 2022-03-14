@@ -29,6 +29,10 @@ spring:
           uri: lb://service-sms
           predicates:
             - Path=/*/sms/**
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/*/oss/**
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 # nacos服务地址
