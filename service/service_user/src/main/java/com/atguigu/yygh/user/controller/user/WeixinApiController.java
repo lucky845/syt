@@ -1,4 +1,4 @@
-package com.atguigu.yygh.user.controller;
+package com.atguigu.yygh.user.controller.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.yygh.common.result.R;
