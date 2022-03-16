@@ -1,11 +1,9 @@
 package com.atguigu.yygh.vo.order;
 
-import com.atguigu.yygh.vo.msm.MsmVo;
+import com.atguigu.yygh.vo.sms.SmsVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 @ApiModel(description = "OrderMqVo")
@@ -21,7 +19,7 @@ public class OrderMqVo {
 	private String scheduleId;
 
 	@ApiModelProperty(value = "短信实体")
-	private MsmVo msmVo;
+	private SmsVo smsVo;
 
 }
 

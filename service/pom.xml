@@ -16,22 +16,14 @@
         <module>service_user</module>
         <module>service_sms</module>
         <module>service_oss</module>
+        <module>service_orders</module>
     </modules>
 
     <dependencies>
-        <!--httpclient-->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
         <!--gson-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
         </dependency>
         <!--依赖service_utils-->
         <dependency>

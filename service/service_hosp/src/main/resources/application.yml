@@ -27,6 +27,12 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+  # rabbitmq地址
+  rabbitmq:
+    host: 192.168.229.128
+    port: 5672
+    username: admin
+    password: 123456
 # mybatis日志
 mybatis-plus:
   configuration:

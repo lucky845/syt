@@ -2,6 +2,8 @@ package com.atguigu.yygh.sms.service.impl;
 
 import com.atguigu.yygh.sms.service.SMSService;
 import com.atguigu.yygh.sms.utils.HttpUtils;
+import com.atguigu.yygh.vo.sms.SmsVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpResponse;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.Map;
  * @author lucky845
  * @date 2022年03月11日 21:11
  */
+@Slf4j
 @Service
 public class SMSServiceImpl implements SMSService {
 
@@ -26,7 +29,7 @@ public class SMSServiceImpl implements SMSService {
         String host = "http://dingxin.market.alicloudapi.com";
         String path = "/dx/sendSms";
         String method = "POST";
-        String appcode = "你的APPCode";
+        String appcode = "你的appcode";
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
@@ -45,5 +48,19 @@ public class SMSServiceImpl implements SMSService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * 就诊人发送短信
+     *
+     * @param smsVo 短信对象
+     */
+    @Override
+    public void sendMsg(SmsVo smsVo) {
+
+        // 测试使用,并未正式发送
+        // log.info("就诊人发送短信: {}", smsVo.getPhone() + "---" + smsVo);
+
+        System.out.println("smsVo = " + smsVo);
     }
 }

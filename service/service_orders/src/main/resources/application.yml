@@ -1,0 +1,55 @@
+# 服务端口
+server:
+  port: 8207
+
+# 服务名
+spring:
+  application:
+    name: service-orders
+
+  # 环境设置
+  profiles:
+    active: dev
+
+  # mysql数据连接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///yygh_order?serverTimezone=UTC&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: root
+
+  # 返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # MongoDB 地址
+  data:
+    mongodb:
+      uri: mongodb://192.168.229.128:27017/test
+
+  # nacos服务地址
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  # rabbitmq地址
+  rabbitmq:
+    host: 192.168.229.128
+    port: 5672
+    username: admin
+    password: 123456
+
+  # redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-active: 20
+        max-wait: -1
+        max-idle: 5
+        min-idle: 0

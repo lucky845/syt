@@ -3,6 +3,7 @@ package com.atguigu.yygh.hosp.controller.user;
 import com.atguigu.yygh.common.result.R;
 import com.atguigu.yygh.hosp.service.ScheduleService;
 import com.atguigu.yygh.model.hosp.Schedule;
+import com.atguigu.yygh.vo.hosp.ScheduleOrderVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -79,11 +80,25 @@ public class UserScheduleController {
     @ApiOperation(value = "获取排班详情")
     @GetMapping("/getSchedule/{id}")
     public R getDetailSchedule(
-            @ApiParam(value = "科室id", required = true)
+            @ApiParam(value = "排班id", required = true)
             @PathVariable String id) {
 
         Schedule schedule = scheduleService.getScheduleById(id);
         return R.ok().data("schedule", schedule);
+    }
+
+    /**
+     * 根据排班id获取预约下单数据(service_order远程调用使用)
+     *
+     * @param scheduleId 排班id
+     */
+    @ApiOperation(value = "根据排班id获取预约下单数据")
+    @GetMapping("/inner/getScheduleOrderVo/{scheduleId}")
+    public ScheduleOrderVo getScheduleOrderVo(
+            @ApiParam(name = "scheduleId", value = "排班id", required = true)
+            @PathVariable("scheduleId") String scheduleId) {
+
+        return scheduleService.getScheduleOrderVo(scheduleId);
     }
 
 }

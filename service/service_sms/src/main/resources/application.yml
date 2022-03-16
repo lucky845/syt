@@ -1,9 +1,11 @@
 # 服务端口
 server:
   port: 8206
+
 spring:
   application:
     name: service-sms
+
   redis:
     host: 127.0.0.1
     port: 6379
@@ -15,14 +17,19 @@ spring:
         max-wait: -1
         max-idle: 5
         min-idle: 0
+
+  rabbitmq:
+    host: 192.168.229.128
+    port: 5672
+    virtual-host: /
+    username: admin
+    password: 123456
+
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
+
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-mybatis-plus:
-  mapper-locations: classpath:com/atguigu/cmsservice/mapper/xml/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

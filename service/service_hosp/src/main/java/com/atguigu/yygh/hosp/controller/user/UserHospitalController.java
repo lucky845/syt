@@ -26,7 +26,7 @@ import java.util.Map;
 @Api(tags = "医院显示接口")
 @RestController
 @RequestMapping("/api/hosp/hospital")
-public class HospitalApiController {
+public class UserHospitalController {
 
     @Autowired
     private HospitalService hospitalService;

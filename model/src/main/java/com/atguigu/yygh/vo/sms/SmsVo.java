@@ -1,15 +1,14 @@
-package com.atguigu.yygh.vo.msm;
+package com.atguigu.yygh.vo.sms;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
 import java.util.Map;
 
 @Data
 @ApiModel(description = "短信实体")
-public class MsmVo {
+public class SmsVo {
 
     @ApiModelProperty(value = "phone")
     private String phone;

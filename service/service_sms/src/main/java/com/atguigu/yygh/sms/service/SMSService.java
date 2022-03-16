@@ -1,5 +1,7 @@
 package com.atguigu.yygh.sms.service;
 
+import com.atguigu.yygh.vo.sms.SmsVo;
+
 import java.util.Map;
 
 public interface SMSService {
@@ -12,4 +14,10 @@ public interface SMSService {
      */
     boolean send(String phone, Map<String, Object> param);
 
+    /**
+     * 就诊人发送短信
+     *
+     * @param smsVo 短信对象
+     */
+    void sendMsg(SmsVo smsVo);
 }
