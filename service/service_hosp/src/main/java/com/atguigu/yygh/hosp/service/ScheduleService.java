@@ -35,10 +35,27 @@ public interface ScheduleService {
 
     /**
      * 根据医院编号 、科室编号和工作日期，查询排班详细信息
-     * @param hoscode 医院编号
-     * @param depcode 科室编号
+     *
+     * @param hoscode  医院编号
+     * @param depcode  科室编号
      * @param workDate 工作日期
      */
     List<Schedule> getDetailSchedule(String hoscode, String depcode, String workDate);
 
+    /**
+     * 获取可预约排班数据
+     *
+     * @param page    当前页数
+     * @param limit   每页记录数
+     * @param hoscode 医院编号
+     * @param depcode 科室编号
+     */
+    Map<String, Object> getBookingScheduleRule(Integer page, Integer limit, String hoscode, String depcode);
+
+    /**
+     * 获取排班详情
+     *
+     * @param id 科室id
+     */
+    Schedule getScheduleById(String id);
 }

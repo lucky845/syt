@@ -38,8 +38,17 @@ public interface DepartmentService {
 
     /**
      * 根据科室编号，和医院编号，查询科室名称
+     *
      * @param hoscode 医院编号
      * @param depcode 科室编号
      */
     Object getDepName(String hoscode, String depcode);
+
+    /**
+     * 根据医院编号和科室编号获取医院信息
+     *
+     * @param hoscode 医院编号
+     * @param depcode 科室编号
+     */
+    Department getDepartment(String hoscode, String depcode);
 }
